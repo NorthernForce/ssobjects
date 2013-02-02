@@ -46,7 +46,7 @@ class ArthurServer : public TelnetServer
 	    	psocket->close();
         }
 
-        void idle(uint32
+        //void idle(uint32
 };
 
 int main(int argc, char const *argv[])
