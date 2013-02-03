@@ -261,8 +261,8 @@ TelnetServer::ThreadHandlerProc(void)
   StopWatch timer;
 
   idle();                     //give idle a chance to go as soon as server is running
-  tv.tv_sec = 1;
-  tv.tv_usec = 0;//getSleepTime();
+  tv.tv_sec = m_nIdleFrequency/1000;
+  tv.tv_usec = (m_nIdleFrequency-tv.tv_sec*1000) * 1000;
   timer.start();
 
   while(running())

@@ -4,8 +4,10 @@ Copyright (c) 2006, Lee Patterson & Ant Works Software
 Web   : http://ssobjects.sourceforge.net
 Email : workerant@users.sourceforge.net
 
+Note, this is a clone of the ssobjects located at http://ssobjects.sourceforge.net
+
 See LICENSE for details on using this source.
-See CHANGELOG.txt for list of changes.
+See CHANGELOG.txt for list of changes.
 
 
 C O N T E N T S:
@@ -23,6 +25,7 @@ C O N T E N T S:
 4. Using ssobjects
   4.1 Examples
   4.2 Tutorials
+5. FRCServer
 
 
 
@@ -58,7 +61,8 @@ ssobjects     Contains all source and makefile
  +-win32     Contains project files for 
  |           building with MS Dev Studio
  +-examples  Contains examples that use ssobjects
-
+   |
+   +-frcserver Contains the falgor172 server
 
 3. Building
 ssobjects currently compiles on Mandrake Linux 7.1 & 8.0, Microsoft VC 5.0 & 6.0. 
@@ -127,4 +131,11 @@ See README.txt in the examples folder.
 
 4.2 Tutorials
 Tutorials are planned once ssobjects is properly documented.
+
+5.0 FRCServer
+The FRCServer is used for 2013 camera processing. The robot will connect to
+the frc server that runs on a Raspberry PI. It gets camera information by requesting
+that it become a listener, and how often it wants to get camera updates.
+
+See the README in the frcserver directory for more information.
 
