@@ -261,13 +261,13 @@ TelnetServer::ThreadHandlerProc(void)
   StopWatch timer;
 
   idle();                     //give idle a chance to go as soon as server is running
-  tv.tv_sec = m_nIdleFrequency/1000;
-  tv.tv_usec = (m_nIdleFrequency-tv.tv_sec*1000) * 1000;
   timer.start();
 
   while(running())
   {
     int iMaxFD = getMaxFD();
+    tv.tv_sec = m_nIdleFrequency/1000;  //it is good style to re-initialize it before each invocation of select()
+    tv.tv_usec = (m_nIdleFrequency-tv.tv_sec*1000) * 1000;
     iReady = select(iMaxFD+1,&m_rset,NULL/*&m_wset*/,NULL,&tv);     //see porting note above for select behaviour
     if(running())
     {
@@ -281,9 +281,7 @@ TelnetServer::ThreadHandlerProc(void)
 
       if(timer.milliseconds() >= (m_nIdleFrequency-MIN_FREQ) && running())     //20ms error range as a timeout isn't percise
       {
-        idle();
-        //tv.tv_sec = 0;
-        //tv.tv_usec = getSleepTime();
+        idle(timer.milliseconds());
         timer.start();
       }
     }
