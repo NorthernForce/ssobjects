@@ -13,7 +13,7 @@
 class ArthurServer : public TelnetServer
 {
 	public:
-		enum {FREQUENCY = 5000}; 
+		enum {FREQUENCY = 1000}; 
 		ArthurServer(SockAddr& saBind) : TelnetServer(saBind,FREQUENCY){};
 		void processSingleMsg(PacketMessage* pmsg)
         {
@@ -43,17 +43,20 @@ class ArthurServer : public TelnetServer
         	TelnetServerSocket* psocket = (TelnetServerSocket*)pmsg->socket();
     		printf("got connection\n");
         	psocket->println("Daytime");
-	    	psocket->close();
         }
 
-        //void idle(uint32
+        void idle(unsigned32 nTimer)
+        {
+            send2All("All good things come to those on TCP/IP! All good things come to those on TCP/IP! All good things come to those on TCP/IP! All good things come to those on TCP/IP! All good things come to those on TCP/IP! All good things come to those on TCP/IP! All good things come to those on TCP/IP! All good things come to those on TCP/IP! All good things come to those on TCP/IP! All good things come to those on TCP/IP! All good things come to those on TCP/IP! All good things come to those on TCP/IP! END\n");
+            printf("tick\n");
+        }
 };
 
 int main(int argc, char const *argv[])
 {
 	try 
 	{
-		unsigned16 wPort = 9999;
+		unsigned16 wPort = 1180;
 
 		SockAddr saBind((ULONG)INADDR_ANY,wPort);
 		ArthurServer server(saBind);          
@@ -61,7 +64,7 @@ int main(int argc, char const *argv[])
       		printf("Can't bind\n");       // should not throw from main after server constructed
         else
         {
-            printf("Server on port %d\n",9999);
+            printf("Server on port %d\n",wPort);
             printf("Run 'pingclient' in another terminal to connect and test.\n");
             server.startServer();               // server will now listen for connections
             printf("server is finished.\n");
