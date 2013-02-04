@@ -21,7 +21,9 @@ SERVER_DBG  := server_dbg
 #
 # source files used for project(s)
 #
-SERVER_SRCS := server.cpp 
+SERVER_SRCS := \
+	server.cpp \
+	timed.cpp
 
 #
 #-----------------------------------------------------
