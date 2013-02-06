@@ -161,8 +161,9 @@ class ArthurServer : public TelnetServer
         void sendCameraUpdates(unsigned long now)
         {
             char buff[1024];
-            const char* msg = "CAMC angle1,angle2,distance,x,y,orientation";
-            snprintf(buff,sizeof buff,"%s,%lu\n",msg,now);  //check your docs, to make sure this automatically is null terminated
+            //const char* msg = "CAMC angle1,angle2,distance,x,y,orientation";
+            const char* msg = "CAMC 12.3, 14.2, 20.1, 4, 5, 30.1";
+	    snprintf(buff,sizeof buff,"%s,%lu\n",msg,now);  //check your docs, to make sure this automatically is null terminated
 
             User* puser = m_userList.getHead();
             while(puser)
