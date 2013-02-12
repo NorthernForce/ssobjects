@@ -123,7 +123,10 @@ class ArthurServer : public TelnetServer
         {
 //            if(m_timer.update())
 //                printf("%06lu tick\n",m_stopwatch.milliseconds());
-            sendCameraUpdates((unsigned long)now);
+            float azimuth = 1.0;
+            float elevation = 2.0;
+            int Npix = 100;
+            sendCameraUpdates((unsigned long)now, azimuth, elevation, Npix);
         }
 
         void processCommand(TelnetServerSocket* psocket,const char* pcmd,char* pstring)
@@ -158,12 +161,12 @@ class ArthurServer : public TelnetServer
         }
 
         //Send the camera information to whoever wants it
-        void sendCameraUpdates(unsigned long now)
+        void sendCameraUpdates(unsigned long now, float azimuth, float elevation, int Npix)
         {
             char buff[1024];
-            //const char* msg = "CAMC angle1,angle2,distance,x,y,orientation";
-            const char* msg = "CAMC 12.3, 14.2, 20.1, 4, 5, 30.1";
-	    snprintf(buff,sizeof buff,"%s,%lu\n",msg,now);  //check your docs, to make sure this automatically is null terminated
+            //const char* msg = "CAMC Nobj,azimuth,elevation,Npix";
+            const char* msg = "CAMC 1, %f, %f, %d\n";
+	    snprintf(buff,sizeof buff,msg,azimuth,elevation,Npix);  //check your docs, to make sure this automatically is null terminated
 
             User* puser = m_userList.getHead();
             while(puser)
