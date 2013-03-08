@@ -22,7 +22,7 @@ SERVER_DBG  := server_dbg
 # source files used for project(s)
 #
 SERVER_SRCS := \
-	server.cpp \
+	server2.cpp \
 	timed.cpp
 
 #
@@ -40,9 +40,10 @@ SERVER_OBJS_DBG := $(SERVER_SRCS:.cpp=_dbg.o)
 #
 # Include and library paths used in source
 #
-INCLUDES := -I../.. -I.
-LIBS_DBG := -L../.. -lssobjects_dbg -lpthread 
-LIBS     := -L../.. -lssobjects     -lpthread 
+INCLUDES := -I../.. -I. -I/home/pi/OpenCV-2.4.3/release//include/opencv -I/home/pi/OpenCV-2.4.3/release//include  /home/pi/OpenCV-2.4.3/release//lib/libopencv_calib3d.so /home/pi/OpenCV-2.4.3/release//lib/libopencv_contrib.so /home/pi/OpenCV-2.4.3/release//lib/libopencv_core.so /home/pi/OpenCV-2.4.3/release//lib/libopencv_features2d.so /home/pi/OpenCV-2.4.3/release//lib/libopencv_flann.so /home/pi/OpenCV-2.4.3/release//lib/libopencv_gpu.so /home/pi/OpenCV-2.4.3/release//lib/libopencv_highgui.so /home/pi/OpenCV-2.4.3/release//lib/libopencv_imgproc.so /home/pi/OpenCV-2.4.3/release//lib/libopencv_legacy.so /home/pi/OpenCV-2.4.3/release//lib/libopencv_ml.so /home/pi/OpenCV-2.4.3/release//lib/libopencv_nonfree.so /home/pi/OpenCV-2.4.3/release//lib/libopencv_objdetect.so /home/pi/OpenCV-2.4.3/release//lib/libopencv_photo.so /home/pi/OpenCV-2.4.3/release//lib/libopencv_stitching.so /home/pi/OpenCV-2.4.3/release//lib/libopencv_ts.so /home/pi/OpenCV-2.4.3/release//lib/libopencv_video.so /home/pi/OpenCV-2.4.3/release//lib/libopencv_videostab.so  
+
+LIBS_DBG := -L../.. -lssobjects_dbg -lpthread $(INCLUDES)
+LIBS     := -L../.. -lssobjects     -lpthread $(INCLUDES)
 
 #
 # Build options
@@ -60,7 +61,7 @@ CC := g++
 # Targets
 #
 none         : debug
-all          : debug release
+all2         : debug release
 release      : tags $(SERVER)      
 debug        : tags $(SERVER_DBG) 
 makefile.dep : depend
